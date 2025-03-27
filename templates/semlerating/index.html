@@ -1,0 +1,17 @@
+{% include "../base/nav.html" %}
+
+<div>
+{% for semla in semlor %}
+  <div>
+    <h2>{{semla.bakery}}</h2>
+    <p>{{semla.city}}</p>
+    {% load static %}
+    <img src="{% static 'semlerating/' %}{{semla.picture_name}}" alt="{{semla.bakery}}"></img>
+    <p>{{semla.vegan}}</p>
+    <p>{{semla.price}}</p>
+    <p>{{semla.kind}}</p>
+    <p>Average Rating: {{semla.avg_rating|default:"No ratings yet"}}</p>
+  <div>
+
+{% endfor %}
+<div>

@@ -2,3 +2,4 @@ Django
 psycopg[binary]
 django-crispy-forms
 crispy-bootstrap5
+django-tailwind[reload]

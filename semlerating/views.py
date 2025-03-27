@@ -13,6 +13,8 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-# def semlor(request):
-
-    # Create your views here.
+def semlor(request):
+    semlor = Semlor.objects.all()
+    template = loader.get_template("semlerating/index.html")
+    context = {'semlor': semlor}
+    return HttpResponse(template.render(context, request))

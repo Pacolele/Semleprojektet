@@ -1,0 +1,25 @@
+{% load static tailwind_tags %}
+{% load django_htmx %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% tailwind_css %}
+  {% htmx_script %}
+  <script>
+  document.body.addEventListener('htmx:configRequest', (event) => {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    if (csrfToken) {
+      event.detail.headers['X-CSRFToken'] = csrfToken;
+    }
+  });
+</script>
+</head>
+
+<body hx-headers='{"x-csrftokens": "{{csrf_token}}"}' class="bg-base p-4">
+  {% block form %} {% endblock %}
+</body>
+
+</html>

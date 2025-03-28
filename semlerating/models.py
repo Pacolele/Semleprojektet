@@ -1,11 +1,14 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Semlor(models.Model):
     def __str__(self):
         return self.bakery
+
+    @property
+    def avg_rating(self):
+        return getattr(self, '_annotated_avg', None) or self.ratings.aggregate(
+            models.Avg('rating'))['rating__avg']
     bakery = models.CharField(max_length=150)
     city = models.CharField(max_length=50)
     picture_name = models.CharField(max_length=200)
@@ -20,3 +23,4 @@ class Rating(models.Model):
     semla = models.ForeignKey(
         Semlor, on_delete=models.CASCADE, related_name='ratings')
     rating = models.IntegerField(default=0)
+    comment = models.CharField(max_length=400, blank=True)

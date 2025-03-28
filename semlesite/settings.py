@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    'django_htmx',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'semlesite.urls'
@@ -81,11 +83,11 @@ WSGI_APPLICATION = 'semlesite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SEMLEDB', 
+        'NAME': 'SEMLEDB',
         'USER': 'elliothernesten',
         'PASSWORD': 'PASSWORD',
         'HOST': 'localhost',
-        'PORT': '5432', 
+        'PORT': '5432',
     }
 }
 
@@ -127,15 +129,15 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIR = [
-        BASE_DIR / 'static'
-        ]
+    BASE_DIR / 'static'
+]
 
-STATIC_ROOT = BASE_DIR.parent  / 'semlesite' / 'static'
+STATIC_ROOT = BASE_DIR.parent / 'semlesite' / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
- 
+
 
 # Tailwind app name
 
@@ -144,5 +146,5 @@ TAILWIND_APP_NAME = 'theme'
 # Intenal ip adress
 
 INTERNAL_IPS = [
-        "127.0.0.1",
-        ]
+    "127.0.0.1",
+]

@@ -1,6 +1,7 @@
 import csv
 from django.core.management.base import BaseCommand, CommandError
 from semlerating.forms import SemlorForm
+from semlerating.models import Semlor
 
 
 class Command(BaseCommand):
@@ -34,13 +35,21 @@ class Command(BaseCommand):
                     'kind': row['Kind'].strip(),
                 }
                 print(cleaned_row)
-                form = SemlorForm(data=cleaned_row)
-                if form.is_valid():
-                    form.save()
-                    self.imported_counter += 1
+
+                if not Semlor.objects.filter(
+                    bakery=cleaned_row['bakery'],
+                    city=cleaned_row['city'],
+                    kind=cleaned_row['kind'],
+                ).exists():
+                    form = SemlorForm(data=cleaned_row)
+                    if form.is_valid():
+                        form.save()
+                        self.imported_counter += 1
+                    else:
+                        self.stderr.write(f"Errors import semlor\n")
+                        self.stderr.write(f"{form.errors.as_json()}\n")
                 else:
-                    self.stderr.write(f"Errors import semlor\n")
-                    self.stderr.write(f"{form.errors.as_json()}\n")
+                    self.skipped_counter += 1
 
     def finalize(self):
         print(f"------------------------- \n Imports: {

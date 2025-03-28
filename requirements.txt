@@ -1,3 +1,5 @@
 Django
 psycopg[binary]
 django-tailwind[reload]
+django-htmx
+django-ipware

@@ -1,0 +1,16 @@
+<div id="ratings_container" hx-get="{% url 'semlerating:semlor' %}" hx-trigger="refreshRatings from:body"
+  hx-swap="outerHTML">
+  {% for semla in semlor %}
+  <div class="bg-base-300 border-base-content border-2 rounded-lg p-2 flex flex-col items-center justify-center m-4">
+    <h2 class='mb-0.5 text-2xl text-primary font-semibold '>{{semla.bakery}}</h2>
+    <p class="text-sm font-semibold text-primary text-blue-800 uppercase">{{semla.city}}</p>
+    <p>{{semla.vegan}}</p>
+    <p>{{semla.price}}</p>
+    <p>{{semla.kind}}</p>
+    <p>Average Rating: {{semla.avg_rating|default:"No ratings yet"}}</p>
+  </div>
+  <button class="btn btn-primary" onclick="rate_modal.showModal()" hx-get="{% url 'semlerating:rate_form' semla.id %}"
+    hx-target="#inner_modal" hx-trigger="click">Rate me!</button>
+</div>
+{% endfor %}
+</div>

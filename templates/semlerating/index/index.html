@@ -1,0 +1,22 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="grid grid-cols-3 auto-rows">
+{% for semla in semlor %}
+    <div class="bg-base-300 border-base-content border-2 rounded-lg p-2 bg-base-100 flex flex-col items-center justify-center w-100 m-4">
+      <div class="m-2.5 overflow-hidden rounded-md h-80 w-80 flex justify-center items-center">
+        <img class="w-full h-full object-cover " src="{% static 'semlerating/' %}{{semla.picture_name}}" alt="{{semla.bakery}}"></img>
+      </div>
+      <div class="p-6 mb-2 text-center">      
+        <h2 class='mb-0.5 text-2xl text-primary font-semibold '>{{semla.bakery}}</h2>
+        <p class="text-sm font-semibold text-primary text-blue-800 uppercase">{{semla.city}}</p>
+        <p>{{semla.vegan}}</p>
+        <p>{{semla.price}}</p>
+        <p>{{semla.kind}}</p>
+        <p>Average Rating: {{semla.avg_rating|default:"No ratings yet"}}</p></div>
+    </div>   
+    
+{% endfor %}
+</div>
+{% endblock %}

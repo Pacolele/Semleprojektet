@@ -1,0 +1,22 @@
+{% extends "semlerating/form/base_form.html" %}
+
+{% block form %}
+<form hx-post="{% url 'semlerating:rate_semla' semla.id %}" hx-target="#inner_modal" hx-swap="innerHTML" method="POST">
+  {% csrf_token %}
+  <h3 class="text-lg font-bold">Rate {{ semla.bakery }}'s {{semla.kind}} semla</h3>
+
+  <div class="rating my-3 flex justify-center">
+    {% for i in "12345" %}
+    <input type="radio" name="rating" value="{{i}}" required
+      class="mask mask-circle mx-1 bg-primary"
+      aria-label="{{i}} circle" />
+    {% endfor %}
+  </div>
+
+  <label for="comment" class="block mb-2 text-sm font-medium">Comment (optional):</label>
+  <textarea id="comment" name="comment" class="textarea textarea-bordered w-full mb-4"
+    placeholder="Leave a comment..."></textarea>
+
+  <button type="submit" class="btn btn-primary w-full">Submit Rating</button>
+</form>
+{% endblock %}

@@ -24,3 +24,6 @@ class Rating(models.Model):
         Semlor, on_delete=models.CASCADE, related_name='ratings')
     rating = models.IntegerField(default=0)
     comment = models.CharField(max_length=400, blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)

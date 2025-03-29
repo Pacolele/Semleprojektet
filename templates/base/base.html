@@ -1,10 +1,11 @@
 {% load static tailwind_tags %}
 {% load django_htmx %}
 <!DOCTYPE html>
-<html lang="en" data-theme="bumblebee">
+<html lang="en"> 
   <head>
     {% tailwind_css %}
     {% htmx_script %}
+    <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Best semlor{% endblock %}</title>

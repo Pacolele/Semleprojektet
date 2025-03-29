@@ -7,8 +7,9 @@ class Semlor(models.Model):
 
     @property
     def avg_rating(self):
-        return getattr(self, '_annotated_avg', None) or self.ratings.aggregate(
+        avg = getattr(self, '_annotated_avg', None) or self.ratings.aggregate(
             models.Avg('rating'))['rating__avg']
+        return round(avg, 2) if avg is not None else None
     bakery = models.CharField(max_length=150)
     city = models.CharField(max_length=50)
     picture_name = models.CharField(max_length=200)
